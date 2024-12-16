@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bundle": "esbuild --bundle --target=es2020 --sourcemap --outfile=render.js render.tsx",
+    "serve": "esbuild --bundle --target=es2020 --sourcemap --outfile=render.js --servedir=. render.tsx"
   },
   "dependencies": {
     "activitypub-types": "^1.1.0",
+    "esbuild": "^0.24.0",
     "fflate": "^0.8.2",
+    "preact": "^10.25.2",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
