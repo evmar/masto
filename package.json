@@ -1,0 +1,17 @@
+{
+  "name": "masto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "activitypub-types": "^1.1.0",
+    "fflate": "^0.8.2",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  },
+  "type": "module"
+}
