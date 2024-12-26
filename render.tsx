@@ -7,9 +7,15 @@ const notes = notesJson as unknown as APNote[];
 notes.reverse();
 
 function Note({ note }: { note: APNote }) {
+  let attachments;
+  if (note.attachment instanceof Array && note.attachment.length > 0) {
+    const n = note.attachment.length;
+    attachments = <div><i>({n} attachment{n === 1 ? '' : 's'})</i></div>;
+  }
   return <div class='note'>
     <div><a href={note.url as string}>{note.published}</a></div>
     <div dangerouslySetInnerHTML={{ __html: note.content! }} />
+    {attachments}
   </div>;
 }
 
