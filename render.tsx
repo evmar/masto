@@ -1,8 +1,10 @@
 import * as preact from 'preact';
+import * as hooks from 'preact/hooks';
 import notesJson from './notes.json'
 import { APNote, } from 'activitypub-types';
 
 const notes = notesJson as unknown as APNote[];
+notes.reverse();
 
 function Note({ note }: { note: APNote }) {
   return <div class='note'>
@@ -11,8 +13,27 @@ function Note({ note }: { note: APNote }) {
   </div>;
 }
 
-function Body() {
-  return <div>{notes.map(n => <Note note={n} />)}</div>;
+function Main() {
+  const [query, setQuery] = hooks.useState('');
+
+  const filteredNotes = notes.filter(note =>
+    note.content?.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <main>
+      <input
+        class='filter'
+        type='filter'
+        placeholder='filter'
+        value={query}
+        onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
+      />
+      &nbsp;&nbsp;
+      {filteredNotes.length} {query === '' ? 'entries' : 'matches'}
+      {filteredNotes.map(n => <Note note={n} />)}
+    </main>
+  );
 }
 
-preact.render(<Body />, document.body);
+preact.render(<Main />, document.body);
